@@ -26,6 +26,7 @@ namespace Backend
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IFilmRepository, FilmRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddScoped<JwtService>();
 
             // Konfigurasi CORS

@@ -15,17 +15,24 @@ namespace Backend.Data
 
         }
 
-        //Pembuatan tabel dengan nama Users
-        public DbSet<Film> Film { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Film> Film { get; set; }
+        public DbSet<Review> Review { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Film>()
+                .HasMany(f => f.Reviews)
+                .WithOne(r => r.Film)
+                .HasForeignKey(r => r.FilmId);
             //penentuan email sebagai nilai unik
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasIndex(e => e.Email).IsUnique();
             });
         }
-        
+
     }
 }

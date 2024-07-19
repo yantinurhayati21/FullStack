@@ -9,6 +9,9 @@ import Login from "./pages/Login.jsx";
 import FilmList from "./pages/FilmList.jsx";
 import AddFilm from "./pages/AddFilm.jsx";
 import EditFilm from "./pages/EditFilm.jsx";
+import ReviewList from "./pages/ReviewList.jsx";
+import AddReview from "./pages/AddReview.jsx";
+import EditReview from "./pages/EditReview.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +41,18 @@ const router = createBrowserRouter([
       {
         path: "films/edit/:id",
         element: <EditFilm />,
+      },
+      {
+        path: "/reviews",
+        element: <ReviewList />,
+      },
+      {
+        path: "/reviews/add",
+        element: <AddReview />,
+      },
+      {
+        path: "reviews/edit/:id",
+        element: <EditReview />,
       },
     ],
   },
