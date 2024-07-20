@@ -32,18 +32,22 @@ const ReviewList = () => {
     };
 
     return (
-        <div className="container mx-auto py-4">
-            <h1 className="text-3xl font-bold mb-4">Review List</h1>
-            <Link to="/reviews/add" className="btn btn-primary mb-4">Add Review</Link>
-            <ul>
+        <div className="container mx-auto py-8">
+            <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Review List</h1>
+            <div className="text-center mb-6">
+                <Link to="/reviews/add" className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-200">Add Review</Link>
+            </div>
+            <ul className="space-y-4">
                 {reviews.map(review => (
                     <li key={review.id}>
-                        <div className="border p-4 rounded-lg mb-4">
-                            <h2 className="text-2xl font-bold">{review.reviewerName}</h2>
-                            <p>{review.comment}</p>
-                            <p>Rating: {review.rating}</p>
-                            <Link to={`/edit-review/${review.id}`} className="btn btn-secondary mr-2">Edit</Link>
-                            <button onClick={() => handleDelete(review.id)} className="btn btn-danger">Delete</button>
+                        <div className="bg-white border p-6 rounded-lg shadow-lg">
+                            <h2 className="text-2xl font-bold mb-2 text-gray-800">{review.reviewerName}</h2>
+                            <p className="text-gray-600 mb-4">{review.comment}</p>
+                            <p className="text-gray-600 mb-4">Rating: {review.rating}</p>
+                            <div className="flex space-x-2">
+                                <Link to={`/reviews/edit/${review.id}`} className="inline-block bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-700 transition duration-200">Edit</Link>
+                                <button onClick={() => handleDelete(review.id)} className="inline-block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-200">Delete</button>
+                            </div>
                         </div>
                     </li>
                 ))}

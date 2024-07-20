@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AddReviews = () => {
+const AddReview = () => {
   const [films, setFilms] = useState([]);
-  const [reviewerName, setReviewername] = useState("");
+  const [reviewerName, setReviewerName] = useState("");
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
   const [filmId, setFilmId] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +17,10 @@ const AddReviews = () => {
     })
       .then((response) => response.json())
       .then((data) => setFilms(data))
-      .catch((error) => console.error("Error fetching films:", error));
+      .catch((error) => {
+        console.error("Error fetching films:", error);
+        setError("Error fetching films. Please try again later.");
+      });
   }, []);
 
   const handleSubmit = async (e) => {
@@ -40,9 +44,11 @@ const AddReviews = () => {
       } else {
         const errorText = await response.text();
         console.error("Error adding review:", errorText);
+        setError(`Error adding review: ${errorText}`);
       }
     } catch (error) {
       console.error("Network error:", error);
+      setError("Network error. Please try again later.");
     }
   };
 
@@ -52,6 +58,12 @@ const AddReviews = () => {
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
           Add Review
         </h2>
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong className="font-bold">Error:</strong>
+            <span className="block sm:inline">{error}</span>
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -87,12 +99,15 @@ const AddReviews = () => {
             <label className="block text-sm font-medium text-gray-700">
               Rating
             </label>
-            <textarea
+            <input
+              type="number"
+              min="0"
+              max="5"
               value={rating}
               name="rating"
-              onChange={(e) => setRating(e.target.value)}
+              onChange={(e) => setRating(Number(e.target.value))}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Write your rating here"
+              placeholder="Rate the film"
             />
           </div>
           <div>
@@ -101,9 +116,9 @@ const AddReviews = () => {
             </label>
             <input
               type="text"
-              name="reviewername"
+              name="reviewerName"
               value={reviewerName}
-              onChange={(e) => setReviewername(e.target.value)}
+              onChange={(e) => setReviewerName(e.target.value)}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Your name"
             />
@@ -120,4 +135,4 @@ const AddReviews = () => {
   );
 };
 
-export default AddReviews;
+export default AddReview;

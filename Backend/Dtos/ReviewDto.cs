@@ -18,7 +18,7 @@ namespace Backend.Dtos
 
         public int FilmId { get; set; }
         
-        [ForeignKey("FilmId")]
-        public Film Film { get; set; }
+        // [ForeignKey("FilmId")]
+        // public Film Film { get; set; }
     }
 }

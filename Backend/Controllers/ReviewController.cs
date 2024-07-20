@@ -17,9 +17,15 @@ namespace Backend.Controllers
         private readonly IReviewRepository _repository;
         private readonly ILogger<ReviewController> _logger;
 
-        public ReviewController(IReviewRepository repository ,ILogger<ReviewController> logger)
+        //private readonly IFilmRepository _filmRepository;
+
+        public ReviewController(
+            IReviewRepository repository,
+            IFilmRepository filmRepository,
+            ILogger<ReviewController> logger)
         {
             _repository = repository;
+            //_filmRepository = filmRepository;
             _logger = logger;
         }
 
@@ -61,7 +67,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Create(ReviewDto dto)
+        public IActionResult Create([FromBody] ReviewDto dto)
         {
             _logger.LogInformation("Received request to add review: {@review}", dto);
 
@@ -87,8 +93,8 @@ namespace Backend.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred while creating review");
-                return StatusCode(500, "Internal server error");
+                _logger.LogError(ex, "Error occurred while creating review. Review DTO: {@review}", dto);
+                return StatusCode(500, "Internal server error. Please contact support.");
             }
         }
 
@@ -152,6 +158,6 @@ namespace Backend.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        
+
     }
 }
