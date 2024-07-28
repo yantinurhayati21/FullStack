@@ -21,11 +21,9 @@ namespace Backend.Controllers
 
         public ReviewController(
             IReviewRepository repository,
-            IFilmRepository filmRepository,
             ILogger<ReviewController> logger)
         {
             _repository = repository;
-            //_filmRepository = filmRepository;
             _logger = logger;
         }
 

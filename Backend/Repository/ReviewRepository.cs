@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Backend.Data;
+using Backend.Dtos;
 using Backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repository
 {
-    public class ReviewRepository:IReviewRepository
+    public class ReviewRepository : IReviewRepository
     {
         private readonly AppDbContext _context;
 
@@ -16,10 +18,21 @@ namespace Backend.Repository
             _context = context;
         }
 
-        public IEnumerable<Review> GetAll()
+        public IEnumerable<ReviewDisplayDto> GetAll()
+{
+    return _context.Review
+        .Include(r => r.Film)
+        .Select(r => new ReviewDisplayDto
         {
-            return _context.Review.ToList();
-        }
+            Id = r.Id,
+            ReviewerName = r.ReviewerName,
+            Comment = r.Comment,
+            Rating = r.Rating,
+            FilmId = r.FilmId,
+            FilmTitle = r.Film.Title  // Map film title
+        })
+        .ToList();
+}
 
         public Review GetById(int id)
         {

@@ -4482,11 +4482,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FullStack\\backend\\Backend.csproj",
+      "projectUniqueName": "D:\\FullStack\\Backend\\Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "D:\\FullStack\\backend\\Backend.csproj",
+      "projectPath": "D:\\FullStack\\Backend\\Backend.csproj",
       "packagesPath": "C:\\Users\\Yanti\\.nuget\\packages\\",
-      "outputPath": "D:\\FullStack\\backend\\obj\\",
+      "outputPath": "D:\\FullStack\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yanti\\AppData\\Roaming\\NuGet\\NuGet.Config",

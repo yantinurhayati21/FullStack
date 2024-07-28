@@ -8,7 +8,7 @@ const AddReview = () => {
   const [rating, setRating] = useState(0);
   const [filmId, setFilmId] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     fetch("http://localhost:5000/api/films", {

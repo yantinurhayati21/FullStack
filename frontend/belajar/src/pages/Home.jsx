@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
+import Carousel from "../components/Carousel";
 
 export default function Home() {
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-400 to-purple-500">
-            <div className="bg-white p-10 rounded-lg shadow-lg text-center">
+        <div className="relative w-full h-screen">
+            <Carousel />
+            <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-50 text-white p-4">
                 <h1 className="text-4xl font-bold mb-6">Welcome to Our Film App</h1>
                 <p className="text-lg mb-8">Discover and manage your favorite films with ease.</p>
                 <div className="space-x-4">
